@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ROSHAN BK - Final Interview Preparation</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #eef3f9;
+    margin: 0;
+    padding: 0;
+    color: #222;
+}
+
+header {
+    background: linear-gradient(135deg, #102c54, #2563eb);
+    color: white;
+    text-align: center;
+    padding: 30px 15px;
+}
+
+header h1 {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.container {
+    max-width: 850px;
+    margin: auto;
+    padding: 15px;
+}
+
+.info {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    line-height: 1.9;
+}
+
+.search {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #2563eb;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.card {
+    background: white;
+    margin-bottom: 18px;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.number {
+    color: #2563eb;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.question {
+    font-size: 19px;
+    font-weight: bold;
+    margin: 12px 0;
+    line-height: 1.6;
+}
+
+.nepali {
+    color: #666;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.answer {
+    display: none;
+    background: #f1f7ff;
+    padding: 16px;
+    border-left: 4px solid #2563eb;
+    border-radius: 8px;
+    margin-top: 15px;
+    line-height: 2;
+    white-space: pre-line;
+    font-size: 17px;
+}
+
+.answer.show {
+    display: block;
+}
+
+button {
+    border: none;
+    padding: 11px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 5px 5px 5px 0;
+}
+
+.show-btn {
+    background: #2563eb;
+    color: white;
+}
+
+.speak-btn {
+    background: #16a34a;
+    color: white;
+}
+
+.stop-btn {
+    background: #dc2626;
+    color: white;
+}
+
+.practice-btn {
+    background: #7c3aed;
+    color: white;
+}
+
+.controls {
+    margin-bottom: 20px;
+}
+
+footer {
+    text-align: center;
+    background: #102c54;
+    color: white;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+@media(max-width:600px) {
+    .question {
+        font-size: 17px;
+    }
+
+    .answer {
+        font-size: 16px;
+    }
+
+    button {
+        font-size: 13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🇯🇵 最終面接 練習BOOK</h1>
+<p>
+介護・福祉 × IT<br>
+Final Interview Preparation<br>
+BK ROSHAN
+</p>
+</header>
+
+<div class="container">
+
+<div class="info">
+<h2>👨‍💻 自己紹介情報</h2>
+
+<strong>名前：</strong>ビー ケー ローサン<br>
+<strong>国籍：</strong>ネパール<br>
+<strong>学校：</strong>専門学校ニホン国際ITカレッジ<br>
+<strong>学年：</strong>3年生<br>
+<strong>卒業予定：</strong>2027年3月<br>
+<strong>日本語：</strong>JLPT N3<br>
+<strong>IT：</strong>Java / HTML / CSS / JavaScript
+</div>
+
+<h2>📚 面接質問と回答</h2>
+
+<input
+type="text"
+class="search"
+id="search"
+placeholder="🔍 質問を検索..."
+oninput="searchQuestions()"
+>
+
+<div class="controls">
+
+<button class="show-btn" onclick="showAll()">
+📖 Show All Answers
+</button>
+
+<button class="stop-btn" onclick="hideAll()">
+🙈 Hide All
+</button>
+
+<button class="stop-btn" onclick="stopSpeech()">
+🔇 Stop Voice
+</button>
+
+</div>
+
+<div id="questions"></div>
+
+<div class="info">
+<h2>⭐ 面接のポイント</h2>
+
+<p>① 笑顔で話す — मुस्कुराएर बोल्ने</p>
+<p>② ゆっくり話す — बिस्तारै बोल्ने</p>
+<p>③ 分からないときは確認する — नबुझेमा सोध्ने</p>
+<p>④ ITを学びたい気持ちを伝える — IT सिक्ने इच्छा देखाउने</p>
+<p>⑤ 長く働きたい気持ちを伝える — लामो समय काम गर्ने इच्छा देखाउने</p>
+</div>
+
+<div class="info">
+<h2>🙏 面接の最後のあいさつ</h2>
+
+<p id="closing">
+本日はお忙しい中、面接の時間をいただき、
+ありがとうございました。
+
+御社で働けるように、
+これからも一生懸命勉強します。
+
+本日はありがとうございました。
+</p>
+
+<button class="speak-btn"
+onclick="speak(document.getElementById('closing').innerText)">
+🔊 Japanese Voice
+</button>
+</div>
+
+</div>
+
+<footer>
+ROSHAN BK | IT Engineer Interview Practice
+</footer>
+
+<script>
+
+const data = [
+
+{
+q:"自己紹介をお願いします。",
+np:"आफ्नो परिचय दिनुहोस्।",
+a:`はじめまして。
+ビー ケー ローサンと申します。
+ネパールから来ました。
+
+現在、専門学校ニホン国際ITカレッジの3年生です。
+
+学校ではJava、HTML、CSS、JavaScriptなどを勉強しています。
+
+2027年3月に卒業する予定です。
+
+本日はよろしくお願いいたします。`
+},
+
+{
+q:"なぜ弊社を志望しましたか。",
+np:"हाम्रो कम्पनीमा किन काम गर्न चाहनुहुन्छ?",
+a:`私はITの仕事に興味があります。
+
+説明会で、介護・福祉の仕事をITでサポートしていることを知りました。
+
+私もITの技術を使って、人の役に立ちたいと思いました。
+
+そのため、御社を志望しました。`
+},
+
+{
+q:"なぜITエンジニアになりたいですか。",
+np:"IT Engineer किन बन्न चाहनुहुन्छ?",
+a:`私は昔からパソコンが好きです。
+
+自分でプログラムを作ることに興味があります。
+
+ITの技術を使って、人の役に立つシステムを作りたいです。
+
+そのため、ITエンジニアになりたいです。`
+},
+
+{
+q:"学校では何を勉強していますか。",
+np:"विद्यालयमा के पढ्दै हुनुहुन्छ?",
+a:`学校ではJava、HTML、CSS、JavaScriptを勉強しています。
+
+また、データベースやネットワークについても学んでいます。
+
+特にWebサイト制作に興味があります。`
+},
+
+{
+q:"学校で何か作りましたか。",
+np:"विद्यालयमा केही बनाउनुभएको छ?",
+a:`はい、HTML、CSS、JavaScriptを使って、自分のWebサイトを作りました。
+
+Webサイトでは、ITに関する情報を紹介しています。
+
+デザインやプログラムを自分で考えて作りました。`
+},
+
+{
+q:"Webサイトを作るとき、大変だったことは何ですか。",
+np:"Website बनाउँदा के गाह्रो भयो?",
+a:`デザインを考えることと、エラーを直すことが大変でした。
+
+分からないことは自分で調べて、何度も修正しました。
+
+最後まであきらめずに取り組みました。`
+},
+
+{
+q:"AIを使ったことがありますか。",
+np:"AI प्रयोग गर्नुभएको छ?",
+a:`はい、あります。
+
+プログラミングの勉強や、分からないことを調べるときに使っています。
+
+AIの回答が正しいか、自分でも確認するようにしています。`
+},
+
+{
+q:"介護・福祉の仕事に興味がありますか。",
+np:"Care/Welfare क्षेत्रमा रुचि छ?",
+a:`はい、興味があります。
+
+介護の経験はありませんが、ITを使って介護の仕事をサポートしたいです。
+
+これから介護についても勉強したいです。`
+},
+
+{
+q:"介護の仕事でITをどのように使いたいですか。",
+np:"介護 क्षेत्रमा IT कसरी प्रयोग गर्न चाहनुहुन्छ?",
+a:`ITを使って、介護の仕事を便利にしたいです。
+
+例えば、利用者の情報を管理するシステムを作りたいです。
+
+職員の仕事を少しでも楽にしたいです。`
+},
+
+{
+q:"あなたの強みは何ですか。",
+np:"तपाईंको राम्रो पक्ष के हो?",
+a:`私の強みは、最後まであきらめずに頑張ることです。
+
+分からないことがあっても、自分で調べて勉強します。
+
+また、周りの人と協力して仕事をすることができます。`
+},
+
+{
+q:"あなたの弱みは何ですか。",
+np:"तपाईंको कमजोर पक्ष के हो?",
+a:`私の弱みは、少し心配しすぎることです。
+
+でも、最近は早めに確認したり、周りの人に相談したりするようにしています。`
+},
+
+{
+q:"アルバイトでは何をしていますか。",
+np:"Part-time job मा के गर्नुहुन्छ?",
+a:`現在、飲食店でアルバイトをしています。
+
+接客や調理の仕事をしています。
+
+仕事では、チームワークと責任感を大切にしています。`
+},
+
+{
+q:"アルバイトで学んだことは何ですか。",
+np:"Part-time job बाट के सिक्नुभयो?",
+a:`チームワークの大切さを学びました。
+
+忙しいときも、周りの人と協力して仕事をしています。
+
+また、時間を守ることや、責任を持つことも学びました。`
+},
+
+{
+q:"チームで仕事をすることは好きですか。",
+np:"Team मा काम गर्न मन पर्छ?",
+a:`はい、好きです。
+
+一人でできないことも、チームで協力すればできると思います。
+
+分からないことがあれば、相談しながら仕事を進めたいです。`
+},
+
+{
+q:"日本で働きたい理由は何ですか。",
+np:"जापानमा किन काम गर्न चाहनुहुन्छ?",
+a:`日本でITの技術を学びながら働きたいからです。
+
+日本の会社で経験を積んで、ITエンジニアとして成長したいです。`
+},
+
+{
+q:"日本語で仕事をすることは大丈夫ですか。",
+np:"जापानी भाषामा काम गर्न सक्नुहुन्छ?",
+a:`はい、大丈夫です。
+
+JLPT N3を持っています。
+
+今も日本語を勉強しています。
+
+分からないことがあれば、確認しながら仕事を進めたいです。`
+},
+
+{
+q:"新しいIT技術を勉強することは好きですか。",
+np:"नयाँ IT Technology सिक्न मन पर्छ?",
+a:`はい、好きです。
+
+ITの技術は毎日進化しているので、新しいことを学ぶことが大切だと思います。
+
+入社後も勉強を続けたいです。`
+},
+
+{
+q:"入社後、どのような仕事をしたいですか。",
+np:"कम्पनीमा प्रवेश गरेपछि कस्तो काम गर्न चाहनुहुन्छ?",
+a:`システム開発やWebサイト制作の仕事をしたいです。
+
+また、AIやITを使って、会社の仕事を便利にすることにも興味があります。`
+},
+
+{
+q:"将来、どのようなエンジニアになりたいですか。",
+np:"भविष्यमा कस्तो Engineer बन्न चाहनुहुन्छ?",
+a:`将来は、ITの知識と技術を持ったエンジニアになりたいです。
+
+周りの人から信頼されるエンジニアを目指しています。`
+},
+
+{
+q:"最後に何か質問はありますか。",
+np:"अन्तिममा केही प्रश्न छ?",
+a:`はい、ありがとうございます。
+
+入社後は、どのようなITの仕事を担当しますか。
+
+また、新入社員への研修はありますか。
+
+入社までに、どのような勉強をしておけばよいですか。`
+}
+
+];
+
+const container = document.getElementById("questions");
+
+function renderQuestions() {
+
+container.innerHTML = "";
+
+data.forEach((item,index)=>{
+
+const card = document.createElement("div");
+card.className = "card";
+
+const number = document.createElement("div");
+number.className = "number";
+number.textContent = "QUESTION " + (index+1);
+
+const question = document.createElement("div");
+question.className = "question";
+question.textContent = item.q;
+
+const nepali = document.createElement("div");
+nepali.className = "nepali";
+nepali.textContent = item.np;
+
+const showButton = document.createElement("button");
+showButton.className = "show-btn";
+showButton.textContent = "📖 Show Answer";
+
+const speakQuestion = document.createElement("button");
+speakQuestion.className = "speak-btn";
+speakQuestion.textContent = "🔊 Question";
+
+const speakAnswer = document.createElement("button");
+speakAnswer.className = "practice-btn";
+speakAnswer.textContent = "🔊 Answer";
+
+const answer = document.createElement("div");
+answer.className = "answer";
+answer.textContent = item.a;
+
+showButton.onclick = ()=>{
+
+answer.classList.toggle("show");
+
+showButton.textContent =
+answer.classList.contains("show")
+? "🙈 Hide Answer"
+: "📖 Show Answer";
+
+};
+
+speakQuestion.onclick = ()=>speak(item.q);
+
+speakAnswer.onclick = ()=>speak(item.a);
+
+card.appendChild(number);
+card.appendChild(question);
+card.appendChild(nepali);
+card.appendChild(showButton);
+card.appendChild(speakQuestion);
+card.appendChild(speakAnswer);
+card.appendChild(answer);
+
+container.appendChild(card);
+
+});
+
+}
+
+function speak(text){
+
+if(!("speechSynthesis" in window)){
+alert("Your browser does not support voice.");
+return;
+}
+
+speechSynthesis.cancel();
+
+const utterance = new SpeechSynthesisUtterance(text);
+
+utterance.lang = "ja-JP";
+utterance.rate = 0.85;
+utterance.pitch = 1;
+
+speechSynthesis.speak(utterance);
+
+}
+
+function stopSpeech(){
+speechSynthesis.cancel();
+}
+
+function showAll(){
+
+document.querySelectorAll(".answer").forEach(el=>{
+el.classList.add("show");
+});
+
+document.querySelectorAll(".show-btn").forEach(btn=>{
+if(btn.textContent.includes("Answer")){
+btn.textContent = "🙈 Hide Answer";
+}
+});
+
+}
+
+function hideAll(){
+
+document.querySelectorAll(".answer").forEach(el=>{
+el.classList.remove("show");
+});
+
+document.querySelectorAll(".show-btn").forEach(btn=>{
+if(btn.textContent.includes("Answer")){
+btn.textContent = "📖 Show Answer";
+}
+});
+
+}
+
+function searchQuestions(){
+
+const keyword =
+document.getElementById("search").value.toLowerCase();
+
+document.querySelectorAll(".card").forEach((card,index)=>{
+
+const text =
+(data[index].q + " " +
+data[index].np + " " +
+data[index].a).toLowerCase();
+
+card.style.display =
+text.includes(keyword) ? "block" : "none";
+
+});
+
+}
+
+renderQuestions();
+
+</script>
+
+</body>
+</html>
